@@ -1,11 +1,12 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 import os
+from dotenv import load_dotenv
 
-# AWS RDS PostgreSQL 연결 정보
-DATABASE_URL = "postgresql://invote:@invote-db.cje0mqkkmgel.ap-northeast-2.rds.amazonaws.com:5432/postgres"
+load_dotenv()
 
-# SQLAlchemy 엔진 및 세션 설정
+DATABASE_URL = os.getenv("DATABASE_URL")
+
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
